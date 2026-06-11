@@ -185,11 +185,11 @@
             letter-spacing: 0.02em;
         }
 
-        /* [대수정] 건혜님의 요청 반영: 상하 패딩과 전체 크기를 압축하여 컴팩트하게 조율한 투명 라인 말풍선 */
+      /* [변경 및 신설] 다운로드 버튼 하단 미니멀 투명 라인 말풍선 박스 */
         .nav-pdf-comment-box {
             position: relative;
             margin-top: -0.2vw; 
-            padding: 0.4vw 0.7vw; /* 0.6vw 0.9vw ➡️ 0.4vw 0.7vw 패딩 축소로 말풍선 크기 줄임 완료 */
+            padding: 0.4vw 0.7vw; /* 패딩을 축소하여 말풍선 크기를 슬림하게 줄임 */
             border: 1px solid rgba(255, 255, 255, 0.35); 
             border-radius: 8px;
             background-color: transparent !important; 
@@ -202,6 +202,48 @@
             display: block;
         }
 
+        /* 미니멀 스케일에 맞춘 꼭지 크기 다운사이징 */
+        .nav-pdf-comment-box::before {
+            content: '';
+            position: absolute;
+            top: -5px; 
+            right: 0.8vw; 
+            width: 7px; /* 꼭지 크기를 7px로 축소 */
+            height: 7px; 
+            background-color: transparent !important; 
+            border-left: 1px solid rgba(255, 255, 255, 0.35);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            transform: rotate(45deg);
+        }
+
+        /* 텍스트 크기 미니멀화 및 은은한 투명도 연화 */
+        .nav-pdf-comment-text {
+            font-size: 0.75vw; /* 글씨 크기를 0.75vw로 축소 */
+            font-weight: 400;
+            color: #ffffff;
+            opacity: 0.6; /* 오퍼시티를 0.6으로 낮춰 시선 분산 차단 */
+            letter-spacing: -0.02em;
+            line-height: 1;
+            display: block;
+        }
+
+        /* [완전 투명화] 평소에는 100% 투명하여 아예 안 보이지만, 영역과 추적 기능은 그대로 살아있는 유령 히트 구역 */
+        .secret-hit-zone {
+            margin-top: 1.0vw;
+            width: 5.0vw; 
+            height: 1.2vw; 
+            display: block;
+            text-align: right;
+            
+            /* [대수정] 다른 스크롤 스크립트가 강제로 깨우지 못하도록 !important로 완전 투명 차단막 고정 */
+            opacity: 0 !important; 
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 💡 오직 건혜님 확인용: 그 투명한 빈 공간 마우스 위에 커서를 정확히 올렸을 때만 비밀스럽게 슬루엣 노출 */
+        .secret-hit-zone:hover {
+            opacity: 0.25 !important; 
+        }
         /* [대수정] 작아진 말풍선 스케일에 맞춰 꼬리핀 꼭지 크기도 미니멀화 수선 */
         .nav-pdf-comment-box::before {
             content: '';
@@ -495,16 +537,21 @@
             <span class="nav-brand-label">DOWNLOAD PDF</span>
             <div class="nav-pdf-icon">📂</div>
         </a>
+
         <div class="nav-pdf-comment-box" id="navPdfComment">
             <span class="nav-pdf-comment-text">자세한 내용은 PDF에서 확인하실 수 있습니다 :)</span>
         </div>
 
-        <div style="margin-top: 1.0vw; text-align: right; opacity: 0.55; transition: opacity 0.3s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.55'">
+        <a href="https://hits.sh/rjsp0817-hue.github.io/portfolio/" target="_blank" class="secret-hit-zone">
+            <img src="https://hits.sh/rjsp0817-hue.github.io/portfolio/.svg?label=VISITORS&color=ffffff&labelColor=222222&style=flat" alt="Hits" style="width:100%; height:100%; border:none;"/>
+        </a>
+
+        <div style="margin-top: 1.0vw; text-align: right; opacity: 0.00; transition: opacity 0.3s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.00'">
             <a href="https://hits.sh/rjsp0817-hue.github.io/portfolio/" target="_blank">
                 <img src="https://hits.sh/rjsp0817-hue.github.io/portfolio/.svg?label=VISITORS&color=ffffff&labelColor=222222&style=flat" alt="Hits"/>
             </a>
         </div>
-        
+
     </nav>
 
     <div class="scroll-container" id="mainScrollContainer">
